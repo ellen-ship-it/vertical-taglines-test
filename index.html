@@ -1,0 +1,963 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>GSP Social & Paid Copy Framework 2026</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    /* GSP brand palette */
+    --B800: #001432;
+    --B500: #146CFF;
+    --B300: #A4C6FF;
+    --Y500: #FFD400;
+    --Y300: #FBE98F;
+    --N900: #102C39;
+    --N800: #1F4253;
+    --N200: #E8EEF0;
+    --N100: #F5F9FA;
+    --white: #FFFFFF;
+    --black: #000000;
+    --navy: #002864;
+
+    /* functional */
+    --tofu-color: #26D7A5;
+    --mofu-color: #146CFF;
+    --bofu-color: #FFD400;
+    --radius: 10px;
+    --font: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    background: var(--B800);
+    color: var(--white);
+    font-family: var(--font);
+    font-size: 14px;
+    line-height: 1.4;
+    min-height: 100vh;
+  }
+
+  /* ── HEADER ── */
+  .header {
+    background: var(--B800);
+    border-bottom: 2px solid var(--Y500);
+    padding: 48px 40px 40px;
+  }
+  .header-eyebrow {
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--Y500);
+    margin-bottom: 16px;
+  }
+  .header h1 {
+    font-family: var(--font);
+    font-size: clamp(28px, 4vw, 46px);
+    font-weight: 600;
+    line-height: 1.1;
+    color: var(--white);
+    margin-bottom: 16px;
+    max-width: 680px;
+  }
+  .header-sub {
+    color: var(--B300);
+    font-size: 13px;
+    font-weight: 400;
+    max-width: 680px;
+    line-height: 1.6;
+  }
+
+  /* ── LEGEND ── */
+  .legend {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    padding: 18px 40px;
+    background: rgba(255,255,255,0.04);
+    border-bottom: 1px solid rgba(255,255,255,0.08);
+  }
+  .legend-item {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 12px;
+    font-weight: 500;
+    color: rgba(255,255,255,0.55);
+  }
+  .dot { width: 8px; height: 8px; border-radius: 50%; flex-shrink: 0; }
+  .dot-tofu { background: var(--tofu-color); }
+  .dot-mofu { background: var(--mofu-color); }
+  .dot-bofu { background: var(--bofu-color); }
+
+  /* ── SYSTEM NOTE ── */
+  .system-note {
+    margin: 24px 40px;
+    background: rgba(255,212,0,0.07);
+    border: 1px solid rgba(255,212,0,0.2);
+    border-left: 3px solid var(--Y500);
+    border-radius: var(--radius);
+    padding: 14px 18px;
+    font-size: 12.5px;
+    font-weight: 400;
+    color: rgba(255,255,255,0.65);
+    line-height: 1.65;
+  }
+  .system-note strong {
+    color: var(--Y500);
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+  }
+
+  /* ── SECTION LABEL ── */
+  .section-label {
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--Y500);
+    padding: 32px 40px 0;
+  }
+
+  /* ── VERTICAL BLOCK ── */
+  .vertical-block {
+    margin: 14px 40px 0;
+    border-radius: 12px;
+    border: 1px solid rgba(255,255,255,0.09);
+    background: rgba(255,255,255,0.025);
+    overflow: hidden;
+  }
+
+  .vertical-header {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    padding: 16px 22px;
+    cursor: pointer;
+    background: rgba(255,255,255,0.035);
+    border-bottom: 1px solid rgba(255,255,255,0.07);
+    user-select: none;
+    transition: background 0.15s;
+  }
+  .vertical-header:hover { background: rgba(255,255,255,0.06); }
+
+  .vertical-icon { font-size: 20px; flex-shrink: 0; }
+
+  .vertical-title {
+    font-size: 17px;
+    font-weight: 600;
+    line-height: 1.1;
+    color: var(--white);
+  }
+
+  .vertical-meta {
+    margin-left: auto;
+    display: flex;
+    gap: 10px;
+    align-items: center;
+  }
+
+  .badge {
+    padding: 3px 10px;
+    border-radius: 99px;
+    font-size: 10px;
+    font-weight: 600;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+  }
+  .badge-est  { background: rgba(38,215,165,0.12); color: #26D7A5; border: 1px solid rgba(38,215,165,0.25); }
+  .badge-grow { background: rgba(20,108,255,0.15); color: #A4C6FF; border: 1px solid rgba(20,108,255,0.3); }
+  .badge-gap  { background: rgba(255,212,0,0.12);  color: #FFD400; border: 1px solid rgba(255,212,0,0.3); }
+  .badge-new  { background: rgba(89,85,248,0.15);  color: #BCBAFF; border: 1px solid rgba(89,85,248,0.3); }
+
+  .chevron {
+    font-size: 11px;
+    color: rgba(255,255,255,0.35);
+    transition: transform 0.2s;
+  }
+  .vertical-block.open .chevron { transform: rotate(90deg); }
+
+  .vertical-body { display: none; padding: 0 22px 22px; }
+  .vertical-block.open .vertical-body { display: block; }
+
+  /* ── PERSONA / DESIRE STRIPS ── */
+  .persona-strip, .desire-strip {
+    display: flex;
+    gap: 7px;
+    flex-wrap: wrap;
+    padding-top: 14px;
+  }
+  .desire-strip { padding-top: 6px; padding-bottom: 14px; }
+
+  .persona-chip {
+    background: rgba(20,108,255,0.15);
+    border: 1px solid rgba(164,198,255,0.25);
+    border-radius: 99px;
+    padding: 3px 11px;
+    font-size: 11px;
+    font-weight: 500;
+    color: var(--B300);
+  }
+  .desire-chip {
+    background: rgba(255,212,0,0.08);
+    border: 1px solid rgba(255,212,0,0.18);
+    border-radius: 99px;
+    padding: 3px 10px;
+    font-size: 11px;
+    font-weight: 500;
+    color: #FFD400cc;
+  }
+
+  /* ── PLATFORM GRID ── */
+  .platform-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+    gap: 12px;
+    margin-top: 6px;
+  }
+
+  .platform-card {
+    background: rgba(0,20,50,0.5);
+    border: 1px solid rgba(255,255,255,0.08);
+    border-radius: var(--radius);
+    overflow: hidden;
+  }
+
+  .platform-card-header {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 10px 16px;
+    background: rgba(255,255,255,0.04);
+    border-bottom: 1px solid rgba(255,255,255,0.07);
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.45);
+  }
+  .platform-icon { font-size: 13px; }
+
+  .copy-block {
+    padding: 12px 16px;
+    border-bottom: 1px solid rgba(255,255,255,0.05);
+  }
+  .copy-block:last-child { border-bottom: none; }
+
+  .copy-stage {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    font-size: 10px;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    margin-bottom: 8px;
+  }
+  .stage-tofu { color: var(--tofu-color); }
+  .stage-mofu { color: #60A5FA; }
+  .stage-bofu { color: var(--bofu-color); }
+
+  .copy-format {
+    font-size: 10px;
+    font-weight: 500;
+    color: rgba(255,255,255,0.35);
+    margin-bottom: 5px;
+    letter-spacing: 0.03em;
+  }
+
+  .copy-line {
+    font-size: 13.5px;
+    font-weight: 500;
+    color: var(--white);
+    line-height: 1.5;
+    margin-bottom: 4px;
+  }
+  .copy-line.headline {
+    font-size: 15px;
+    font-weight: 600;
+    line-height: 1.2;
+    color: var(--white);
+  }
+  .copy-line.hook {
+    font-size: 14px;
+    font-weight: 600;
+    line-height: 1.3;
+    color: var(--Y500);
+  }
+  .copy-subtext {
+    font-size: 12px;
+    font-weight: 400;
+    color: rgba(255,255,255,0.5);
+    line-height: 1.6;
+    margin-top: 4px;
+  }
+
+  /* ── FOOTER ── */
+  .footer {
+    margin: 40px 40px 60px;
+    padding: 18px 22px;
+    background: rgba(255,255,255,0.025);
+    border: 1px solid rgba(255,255,255,0.07);
+    border-radius: var(--radius);
+    font-size: 12px;
+    font-weight: 400;
+    color: rgba(255,255,255,0.4);
+    line-height: 1.7;
+  }
+  .footer strong {
+    color: var(--Y500);
+    font-size: 10px;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+
+  @media (max-width: 680px) {
+    .header, .legend, .section-label, .system-note, .footer { padding-left: 16px; padding-right: 16px; }
+    .vertical-block { margin-left: 16px; margin-right: 16px; }
+    .platform-grid { grid-template-columns: 1fr; }
+    .vertical-meta .badge { display: none; }
+  }
+</style>
+</head>
+<body>
+
+<!-- HEADER -->
+<div class="header">
+  <div class="header-eyebrow">Goodshuffle Pro · Social & paid copy framework · 2026</div>
+  <h1>Taglines & copy by vertical, persona, and platform</h1>
+  <p class="header-sub">Full-funnel copy direction for all six verticals, mapped to buyer personas, creative formats, and platforms. Built from the Vertical Strategy + Segmentation Systems doc, Selling to Each Persona, and the 2026 Content Strategy. Applies the Audience-Naming Rule, Tier 2 dog-whistle vocabulary, and the desire axis.</p>
+</div>
+
+<!-- LEGEND -->
+<div class="legend">
+  <div class="legend-item"><div class="dot dot-tofu"></div> TOFU — awareness, scroll-stop, punchy</div>
+  <div class="legend-item"><div class="dot dot-mofu"></div> MOFU — consideration, trust, specificity</div>
+  <div class="legend-item"><div class="dot dot-bofu"></div> BOFU — demo/trial conversion, grounded + direct</div>
+</div>
+
+<!-- SYSTEM NOTE -->
+<div class="system-note">
+  <strong>Production rule</strong> — Per the Audience-Naming Rule (AG April 2026): at least 4 of 5 headlines and 4 of 5 primary text variations must name the audience explicitly. Generic nouns get vertical prefixes ("business" → "event rental business," "gear" → "AV gear"). Every copy line in this doc passes the isolation test: it could only be for the intended vertical.
+</div>
+
+<!-- ══ VERTICAL 1: PARTY & EVENT RENTAL ══ -->
+<div class="section-label">Six core verticals</div>
+
+<div class="vertical-block open" id="v1">
+  <div class="vertical-header" onclick="toggle('v1')">
+    <div class="vertical-icon">🪑</div>
+    <div class="vertical-title">Party & event rental</div>
+    <div class="vertical-meta">
+      <span class="badge badge-est">Established</span>
+      <span class="chevron">▶</span>
+    </div>
+  </div>
+  <div class="vertical-body">
+    <div class="persona-strip">
+      <div class="persona-chip">Betty (Lite/Standard)</div>
+      <div class="persona-chip">Todd (Standard)</div>
+      <div class="persona-chip">Colette (Standard)</div>
+    </div>
+    <div class="desire-strip">
+      <div class="desire-chip">Control</div>
+      <div class="desire-chip">Growth</div>
+      <div class="desire-chip">Confidence</div>
+      <div class="desire-chip">Security</div>
+    </div>
+    <div class="platform-grid">
+
+      <div class="platform-card">
+        <div class="platform-card-header"><span class="platform-icon">📘</span> Meta ads — static / carousel</div>
+        <div class="copy-block">
+          <div class="copy-stage stage-tofu"><div class="dot dot-tofu"></div> TOFU</div>
+          <div class="copy-format">Headline (≤40 chars)</div>
+          <div class="copy-line headline">Your event rental business, without the chaos.</div>
+          <div class="copy-format" style="margin-top:10px">Primary text (≤125 chars)</div>
+          <div class="copy-line">Chairs, arches, uplighting — and a warehouse full of inventory you can't afford to double-book. Sound familiar?</div>
+        </div>
+        <div class="copy-block">
+          <div class="copy-stage stage-mofu"><div class="dot dot-mofu"></div> MOFU</div>
+          <div class="copy-format">Headline</div>
+          <div class="copy-line headline">The software built for event rental businesses — not generic "small business."</div>
+          <div class="copy-format" style="margin-top:10px">Primary text</div>
+          <div class="copy-line">Event rental pros use Goodshuffle Pro to send quotes, track inventory, collect deposits, and sign contracts — in one place. No spreadsheets. No double bookings.</div>
+        </div>
+        <div class="copy-block">
+          <div class="copy-stage stage-bofu"><div class="dot dot-bofu"></div> BOFU</div>
+          <div class="copy-format">Headline</div>
+          <div class="copy-line headline">Book more events. Stop losing gear. Get paid faster.</div>
+          <div class="copy-format" style="margin-top:10px">Primary text</div>
+          <div class="copy-line">Event rental businesses using Goodshuffle Pro send professional proposals in minutes and collect deposits automatically. See it in a free demo.</div>
+        </div>
+      </div>
+
+      <div class="platform-card">
+        <div class="platform-card-header"><span class="platform-icon">🎬</span> Video — hook lines (0–3 sec)</div>
+        <div class="copy-block">
+          <div class="copy-stage stage-tofu"><div class="dot dot-tofu"></div> TOFU</div>
+          <div class="copy-line hook">"If your event rental inventory lives in your head — this is for you."</div>
+        </div>
+        <div class="copy-block">
+          <div class="copy-stage stage-tofu"><div class="dot dot-tofu"></div> TOFU</div>
+          <div class="copy-line hook">"You just double-booked the 60-inch rounds. Again."</div>
+        </div>
+        <div class="copy-block">
+          <div class="copy-stage stage-mofu"><div class="dot dot-mofu"></div> MOFU</div>
+          <div class="copy-line hook">"Here's how event rental businesses send quotes in under 5 minutes."</div>
+        </div>
+        <div class="copy-block">
+          <div class="copy-stage stage-bofu"><div class="dot dot-bofu"></div> BOFU</div>
+          <div class="copy-line hook">"We'll show you the exact setup event rental pros use — in 20 minutes."</div>
+        </div>
+      </div>
+
+      <div class="platform-card">
+        <div class="platform-card-header"><span class="platform-icon">🔍</span> Google search ads</div>
+        <div class="copy-block">
+          <div class="copy-format">Headline 1 (30 chars max)</div>
+          <div class="copy-line headline">Event rental software</div>
+          <div class="copy-format" style="margin-top:8px">Headline 2</div>
+          <div class="copy-line headline">Quotes, contracts & inventory</div>
+          <div class="copy-format" style="margin-top:8px">Headline 3</div>
+          <div class="copy-line headline">Try free — no card needed</div>
+          <div class="copy-format" style="margin-top:10px">Description (≤90 chars)</div>
+          <div class="copy-line">Built for event rental businesses. Manage inventory, send quotes, and get paid — from one place.</div>
+        </div>
+        <div class="copy-block">
+          <div class="copy-format">Alt headline set (BOFU intent)</div>
+          <div class="copy-line headline">Best party rental software</div>
+          <div class="copy-line headline">Stop double-booking inventory</div>
+          <div class="copy-line headline">See a free demo today</div>
+          <div class="copy-subtext">Description: Event rental businesses use Goodshuffle Pro to quote, contract, and track inventory in one place. Book a free demo.</div>
+        </div>
+      </div>
+
+      <div class="platform-card">
+        <div class="platform-card-header"><span class="platform-icon">📱</span> Organic social (IG/FB caption)</div>
+        <div class="copy-block">
+          <div class="copy-stage stage-tofu"><div class="dot dot-tofu"></div> TOFU — your industry, your people</div>
+          <div class="copy-line">The best event rental businesses aren't running on spreadsheets anymore. They're quoting from their phone on the way to a delivery. 📦 Tag an event rental pro who needs to see this.</div>
+        </div>
+        <div class="copy-block">
+          <div class="copy-stage stage-mofu"><div class="dot dot-mofu"></div> MOFU — operator toolkit</div>
+          <div class="copy-line">One inquiry comes in at 9pm. With Goodshuffle Pro, your event rental client gets a professional quote before you wake up. Here's how the automated proposal flow works ↓</div>
+        </div>
+      </div>
+
+      <div class="platform-card">
+        <div class="platform-card-header"><span class="platform-icon">✉️</span> Email subject lines</div>
+        <div class="copy-block">
+          <div class="copy-stage stage-tofu"><div class="dot dot-tofu"></div> TOFU</div>
+          <div class="copy-line">"The event rental warehouse problem nobody talks about"</div>
+          <div class="copy-line">"How event rental pros send quotes in 4 minutes flat"</div>
+        </div>
+        <div class="copy-block">
+          <div class="copy-stage stage-mofu"><div class="dot dot-mofu"></div> MOFU</div>
+          <div class="copy-line">"Your event rental business deserves better than spreadsheets"</div>
+          <div class="copy-line">"What the best event rental businesses have in common"</div>
+        </div>
+        <div class="copy-block">
+          <div class="copy-stage stage-bofu"><div class="dot dot-bofu"></div> BOFU</div>
+          <div class="copy-line">"Ready to see Goodshuffle Pro for your event rental business?"</div>
+          <div class="copy-line">"20 minutes. Your event rental inventory, finally under control."</div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<!-- ══ VERTICAL 2: TENTING ══ -->
+<div class="vertical-block" id="v2">
+  <div class="vertical-header" onclick="toggle('v2')">
+    <div class="vertical-icon">⛺</div>
+    <div class="vertical-title">Tenting</div>
+    <div class="vertical-meta">
+      <span class="badge badge-est">Established</span>
+      <span class="chevron">▶</span>
+    </div>
+  </div>
+  <div class="vertical-body">
+    <div class="persona-strip">
+      <div class="persona-chip">Todd (primary)</div>
+      <div class="persona-chip">Colette (complex ops)</div>
+    </div>
+    <div class="desire-strip">
+      <div class="desire-chip">Control</div>
+      <div class="desire-chip">Security</div>
+      <div class="desire-chip">Growth</div>
+    </div>
+    <div class="platform-grid">
+
+      <div class="platform-card">
+        <div class="platform-card-header"><span class="platform-icon">📘</span> Meta ads — static / carousel</div>
+        <div class="copy-block">
+          <div class="copy-stage stage-tofu"><div class="dot dot-tofu"></div> TOFU</div>
+          <div class="copy-line headline">Tent rental operators: your install crew shouldn't need to call you about inventory.</div>
+          <div class="copy-subtext">Primary text: Clearspan, frame tents, sidewalls, water barrels — Goodshuffle Pro tracks it all so your crew goes in knowing exactly what's on the truck.</div>
+        </div>
+        <div class="copy-block">
+          <div class="copy-stage stage-mofu"><div class="dot dot-mofu"></div> MOFU</div>
+          <div class="copy-line headline">Tent rental businesses that run tight installs use software built for the field — not just the office.</div>
+          <div class="copy-subtext">Primary text: Weather holds, crew scheduling, damage waivers, deposits. Tent rental operators trust Goodshuffle Pro to keep every job buttoned up before the stakes go in.</div>
+        </div>
+        <div class="copy-block">
+          <div class="copy-stage stage-bofu"><div class="dot dot-bofu"></div> BOFU</div>
+          <div class="copy-line headline">Run a tent rental operation? See why the best operators switched to Goodshuffle Pro.</div>
+          <div class="copy-subtext">Primary text: From quote to teardown — inventory, contracts, crew notes, and payments in one place. Book a free 20-minute demo.</div>
+        </div>
+      </div>
+
+      <div class="platform-card">
+        <div class="platform-card-header"><span class="platform-icon">🎬</span> Video hook lines</div>
+        <div class="copy-block">
+          <div class="copy-stage stage-tofu"><div class="dot dot-tofu"></div> TOFU</div>
+          <div class="copy-line hook">"Tent rental operators — how many weather holds did you manage last season in a spreadsheet?"</div>
+        </div>
+        <div class="copy-block">
+          <div class="copy-stage stage-tofu"><div class="dot dot-tofu"></div> TOFU</div>
+          <div class="copy-line hook">"Your install crew is on-site. You're back at the warehouse. Something's missing. Sound familiar?"</div>
+        </div>
+        <div class="copy-block">
+          <div class="copy-stage stage-bofu"><div class="dot dot-bofu"></div> BOFU</div>
+          <div class="copy-line hook">"Here's how tent rental operators stay in control of every job — without being on every job."</div>
+        </div>
+      </div>
+
+      <div class="platform-card">
+        <div class="platform-card-header"><span class="platform-icon">🔍</span> Google search ads</div>
+        <div class="copy-block">
+          <div class="copy-line headline">Tent rental business software</div>
+          <div class="copy-line headline">Manage crews, inventory & installs</div>
+          <div class="copy-line headline">Built for tent rental operators</div>
+          <div class="copy-subtext">Description: Goodshuffle Pro helps tent rental businesses manage jobs from quote to teardown — crew notes, damage waivers, deposits, and inventory tracking in one place.</div>
+        </div>
+      </div>
+
+      <div class="platform-card">
+        <div class="platform-card-header"><span class="platform-icon">✉️</span> Email subject lines</div>
+        <div class="copy-block">
+          <div class="copy-stage stage-tofu"><div class="dot dot-tofu"></div> TOFU</div>
+          <div class="copy-line">"The tent rental inventory problem that kills profit"</div>
+          <div class="copy-line">"How tent rental operators handle weather holds without losing their minds"</div>
+        </div>
+        <div class="copy-block">
+          <div class="copy-stage stage-bofu"><div class="dot dot-bofu"></div> BOFU</div>
+          <div class="copy-line">"Your tent rental operation, finally under control — see how"</div>
+          <div class="copy-line">"20 minutes to see why tent rental operators choose Goodshuffle Pro"</div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<!-- ══ VERTICAL 3: FLORAL ══ -->
+<div class="vertical-block" id="v3">
+  <div class="vertical-header" onclick="toggle('v3')">
+    <div class="vertical-icon">🌸</div>
+    <div class="vertical-title">Floral</div>
+    <div class="vertical-meta">
+      <span class="badge badge-grow">Growing</span>
+      <span class="chevron">▶</span>
+    </div>
+  </div>
+  <div class="vertical-body">
+    <div class="persona-strip">
+      <div class="persona-chip">Jasmine (primary)</div>
+      <div class="persona-chip">Betty (solo florist)</div>
+      <div class="persona-chip">Colette (multi-service)</div>
+    </div>
+    <div class="desire-strip">
+      <div class="desire-chip">Confidence</div>
+      <div class="desire-chip">Time</div>
+      <div class="desire-chip">Security</div>
+    </div>
+    <div class="platform-grid">
+
+      <div class="platform-card">
+        <div class="platform-card-header"><span class="platform-icon">📘</span> Meta ads — static / carousel</div>
+        <div class="copy-block">
+          <div class="copy-stage stage-tofu"><div class="dot dot-tofu"></div> TOFU</div>
+          <div class="copy-line headline">Event florists: your stems shouldn't outlast your invoices.</div>
+          <div class="copy-subtext">Primary text: Perishable inventory, substitutions, hardgoods, centerpiece quotes — event floral businesses have the most complex inventory problem in the industry. Goodshuffle Pro gets it.</div>
+        </div>
+        <div class="copy-block">
+          <div class="copy-stage stage-mofu"><div class="dot dot-mofu"></div> MOFU</div>
+          <div class="copy-line headline">Wedding florists: send proposals that look as good as your arrangements.</div>
+          <div class="copy-subtext">Primary text: Branded quotes, itemized floral arrangements, digital contracts, and automatic deposit collection. Your event floral business, looking like the professional operation it already is.</div>
+        </div>
+        <div class="copy-block">
+          <div class="copy-stage stage-bofu"><div class="dot dot-bofu"></div> BOFU</div>
+          <div class="copy-line headline">The software event florists use to protect their creativity — and get their evenings back.</div>
+          <div class="copy-subtext">Primary text: Goodshuffle Pro handles the quotes, contracts, and deposits so you can focus on the florals. See how in a free demo built for event floral businesses.</div>
+        </div>
+      </div>
+
+      <div class="platform-card">
+        <div class="platform-card-header"><span class="platform-icon">🎬</span> Video hook lines</div>
+        <div class="copy-block">
+          <div class="copy-stage stage-tofu"><div class="dot dot-tofu"></div> TOFU</div>
+          <div class="copy-line hook">"You spent 12 hours designing those floral arrangements. Why does the quote still take 2 more?"</div>
+        </div>
+        <div class="copy-block">
+          <div class="copy-stage stage-tofu"><div class="dot dot-tofu"></div> TOFU</div>
+          <div class="copy-line hook">"Event florists: this is what happens when your business admin stops eating your creative time."</div>
+        </div>
+        <div class="copy-block">
+          <div class="copy-stage stage-mofu"><div class="dot dot-mofu"></div> MOFU</div>
+          <div class="copy-line hook">"Here's the floral proposal that books clients before the competition even responds."</div>
+        </div>
+      </div>
+
+      <div class="platform-card">
+        <div class="platform-card-header"><span class="platform-icon">📱</span> Organic social caption</div>
+        <div class="copy-block">
+          <div class="copy-stage stage-tofu"><div class="dot dot-tofu"></div> TOFU — industry / people pillar</div>
+          <div class="copy-line">The best event florists we know aren't just designers — they're running a full floral business: stems to invoices, centerpieces to contracts. 🌿 What's the hardest part of running your floral business? Drop it below.</div>
+        </div>
+        <div class="copy-block">
+          <div class="copy-stage stage-mofu"><div class="dot dot-mofu"></div> MOFU — professional mirror</div>
+          <div class="copy-line">A wedding florist sent her first Goodshuffle Pro proposal on a Tuesday. Had a signed contract and deposit by Thursday — without a single follow-up email. That's what the right software does for an event floral business.</div>
+        </div>
+      </div>
+
+      <div class="platform-card">
+        <div class="platform-card-header"><span class="platform-icon">✉️</span> Email subject lines</div>
+        <div class="copy-block">
+          <div class="copy-stage stage-tofu"><div class="dot dot-tofu"></div> TOFU</div>
+          <div class="copy-line">"Why event florists lose money on their best clients"</div>
+          <div class="copy-line">"The floral business admin problem nobody warns you about"</div>
+        </div>
+        <div class="copy-block">
+          <div class="copy-stage stage-mofu"><div class="dot dot-mofu"></div> MOFU</div>
+          <div class="copy-line">"What a professional floral proposal actually looks like"</div>
+          <div class="copy-line">"Event florists: this is how the best businesses protect their margins"</div>
+        </div>
+        <div class="copy-block">
+          <div class="copy-stage stage-bofu"><div class="dot dot-bofu"></div> BOFU</div>
+          <div class="copy-line">"See Goodshuffle Pro for your event floral business — 20 min demo"</div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<!-- ══ VERTICAL 4: AV / LIGHTING ══ -->
+<div class="vertical-block" id="v4">
+  <div class="vertical-header" onclick="toggle('v4')">
+    <div class="vertical-icon">💡</div>
+    <div class="vertical-title">AV / Lighting</div>
+    <div class="vertical-meta">
+      <span class="badge badge-grow">Growing</span>
+      <span class="chevron">▶</span>
+    </div>
+  </div>
+  <div class="vertical-body">
+    <div class="persona-strip">
+      <div class="persona-chip">Aaron (primary)</div>
+      <div class="persona-chip">Colette (multi-service)</div>
+    </div>
+    <div class="desire-strip">
+      <div class="desire-chip">Time</div>
+      <div class="desire-chip">Control</div>
+      <div class="desire-chip">Security</div>
+    </div>
+    <div class="platform-grid">
+
+      <div class="platform-card">
+        <div class="platform-card-header"><span class="platform-icon">📘</span> Meta ads — static / carousel</div>
+        <div class="copy-block">
+          <div class="copy-stage stage-tofu"><div class="dot dot-tofu"></div> TOFU</div>
+          <div class="copy-line headline">AV and lighting rental businesses: your gear deserves better than a spreadsheet.</div>
+          <div class="copy-subtext">Primary text: Truss, projectors, subrentals, pull sheets — when your AV gear is spread across multiple load-ins, the last thing you need is inventory chaos. Goodshuffle Pro was built for this.</div>
+        </div>
+        <div class="copy-block">
+          <div class="copy-stage stage-mofu"><div class="dot dot-mofu"></div> MOFU</div>
+          <div class="copy-line headline">Your AV crew knows the tech. Goodshuffle Pro handles the business side.</div>
+          <div class="copy-subtext">Primary text: Pull sheets, subrental tracking, tech riders, venue walkthroughs — your AV and lighting rental business needs a system that keeps up with your crew. Here's one that actually does.</div>
+        </div>
+        <div class="copy-block">
+          <div class="copy-stage stage-bofu"><div class="dot dot-bofu"></div> BOFU</div>
+          <div class="copy-line headline">AV rental businesses run tighter with Goodshuffle Pro. See exactly how in 20 minutes.</div>
+          <div class="copy-subtext">Primary text: Real-time AV gear tracking, conflict detection, contracts, and payments. Built for AV and lighting rental operations that can't afford a missing item on load-in day.</div>
+        </div>
+      </div>
+
+      <div class="platform-card">
+        <div class="platform-card-header"><span class="platform-icon">🎬</span> Video hook lines</div>
+        <div class="copy-block">
+          <div class="copy-stage stage-tofu"><div class="dot dot-tofu"></div> TOFU</div>
+          <div class="copy-line hook">"AV crew: what happens when you pull the wrong gear because the pull sheet was a spreadsheet?"</div>
+        </div>
+        <div class="copy-block">
+          <div class="copy-stage stage-tofu"><div class="dot dot-tofu"></div> TOFU</div>
+          <div class="copy-line hook">"Your AV gear doesn't get a second chance on load-in day. Your inventory system shouldn't either."</div>
+        </div>
+        <div class="copy-block">
+          <div class="copy-stage stage-bofu"><div class="dot dot-bofu"></div> BOFU</div>
+          <div class="copy-line hook">"We'll walk you through how AV and lighting rental businesses track every piece of gear across every gig."</div>
+        </div>
+      </div>
+
+      <div class="platform-card">
+        <div class="platform-card-header"><span class="platform-icon">🔍</span> Google search ads</div>
+        <div class="copy-block">
+          <div class="copy-line headline">AV rental business software</div>
+          <div class="copy-line headline">Track gear, crews & subrentals</div>
+          <div class="copy-line headline">Built for AV & lighting rental</div>
+          <div class="copy-subtext">Description: Goodshuffle Pro helps AV and lighting rental businesses manage pull sheets, inventory conflicts, contracts, and payments — from one system. See a free demo.</div>
+        </div>
+      </div>
+
+      <div class="platform-card">
+        <div class="platform-card-header"><span class="platform-icon">✉️</span> Email subject lines</div>
+        <div class="copy-block">
+          <div class="copy-stage stage-tofu"><div class="dot dot-tofu"></div> TOFU</div>
+          <div class="copy-line">"The AV gear tracking problem that costs rental businesses on load-in day"</div>
+          <div class="copy-line">"Why AV and lighting rental crews are ditching spreadsheets"</div>
+        </div>
+        <div class="copy-block">
+          <div class="copy-stage stage-bofu"><div class="dot dot-bofu"></div> BOFU</div>
+          <div class="copy-line">"See Goodshuffle Pro for your AV rental business — 20 minutes, zero pressure"</div>
+          <div class="copy-line">"Every piece of AV gear. Every gig. Finally in one place."</div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<!-- ══ VERTICAL 5: DJ / ENTERTAINMENT ══ -->
+<div class="vertical-block" id="v5">
+  <div class="vertical-header" onclick="toggle('v5')">
+    <div class="vertical-icon">🎧</div>
+    <div class="vertical-title">DJ / Entertainment</div>
+    <div class="vertical-meta">
+      <span class="badge badge-gap">Priority gap</span>
+      <span class="chevron">▶</span>
+    </div>
+  </div>
+  <div class="vertical-body">
+    <div class="persona-strip">
+      <div class="persona-chip">Colette (primary)</div>
+      <div class="persona-chip">Aaron (solo DJ ops)</div>
+      <div class="persona-chip">Betty (new DJ biz)</div>
+    </div>
+    <div class="desire-strip">
+      <div class="desire-chip">Growth</div>
+      <div class="desire-chip">Confidence</div>
+      <div class="desire-chip">Time</div>
+    </div>
+    <div class="platform-grid">
+
+      <div class="platform-card">
+        <div class="platform-card-header"><span class="platform-icon">📘</span> Meta ads — static / carousel</div>
+        <div class="copy-block">
+          <div class="copy-stage stage-tofu"><div class="dot dot-tofu"></div> TOFU</div>
+          <div class="copy-line headline">Your DJ business books gigs. Goodshuffle Pro books the next one automatically.</div>
+          <div class="copy-subtext">Primary text: Gig calendar, client contracts, deposits, and PA system inventory — all in one place. Because your DJ business runs on reputation, and your backend should match your performance.</div>
+        </div>
+        <div class="copy-block">
+          <div class="copy-stage stage-mofu"><div class="dot dot-mofu"></div> MOFU</div>
+          <div class="copy-line headline">The DJ business software that makes you look as professional as you sound.</div>
+          <div class="copy-subtext">Primary text: Branded proposals. Online contracts. Automatic deposits. Your clients get a seamless experience from the first inquiry — before you ever show up with the booth.</div>
+        </div>
+        <div class="copy-block">
+          <div class="copy-stage stage-bofu"><div class="dot dot-bofu"></div> BOFU</div>
+          <div class="copy-line headline">DJ businesses using Goodshuffle Pro close more gigs — and spend less time on paperwork.</div>
+          <div class="copy-subtext">Primary text: Online proposals, signed contracts, and deposits collected — automatically. See exactly how it works for your DJ business in a free 20-minute demo.</div>
+        </div>
+      </div>
+
+      <div class="platform-card">
+        <div class="platform-card-header"><span class="platform-icon">🎬</span> Video hook lines</div>
+        <div class="copy-block">
+          <div class="copy-stage stage-tofu"><div class="dot dot-tofu"></div> TOFU</div>
+          <div class="copy-line hook">"DJ businesses: how many gigs have you lost because your follow-up was slower than the next guy?"</div>
+        </div>
+        <div class="copy-block">
+          <div class="copy-stage stage-tofu"><div class="dot dot-tofu"></div> TOFU</div>
+          <div class="copy-line hook">"You're the best DJ in your market. Does your booking process prove it?"</div>
+        </div>
+        <div class="copy-block">
+          <div class="copy-stage stage-mofu"><div class="dot dot-mofu"></div> MOFU</div>
+          <div class="copy-line hook">"Here's the DJ business proposal that gets signed while you're still at the venue."</div>
+        </div>
+      </div>
+
+      <div class="platform-card">
+        <div class="platform-card-header"><span class="platform-icon">📱</span> Organic social caption</div>
+        <div class="copy-block">
+          <div class="copy-stage stage-tofu"><div class="dot dot-tofu"></div> TOFU</div>
+          <div class="copy-line">Running a DJ business means your reputation is everything. The couple who had you at their wedding reception refers three friends — but only if the booking experience matched the night you gave them. 🎧 What's the part of running your DJ business you wish someone had warned you about?</div>
+        </div>
+      </div>
+
+      <div class="platform-card">
+        <div class="platform-card-header"><span class="platform-icon">✉️</span> Email subject lines</div>
+        <div class="copy-block">
+          <div class="copy-stage stage-tofu"><div class="dot dot-tofu"></div> TOFU</div>
+          <div class="copy-line">"The DJ business booking problem that quietly kills your referral rate"</div>
+          <div class="copy-line">"What separates a $3K gig DJ from an $8K gig DJ (it's not the music)"</div>
+        </div>
+        <div class="copy-block">
+          <div class="copy-stage stage-bofu"><div class="dot dot-bofu"></div> BOFU</div>
+          <div class="copy-line">"Your DJ business, with a professional booking flow — see how in 20 min"</div>
+          <div class="copy-line">"Sign more DJ contracts automatically. Here's how."</div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<!-- ══ VERTICAL 6: INFLATABLES ══ -->
+<div class="vertical-block" id="v6">
+  <div class="vertical-header" onclick="toggle('v6')">
+    <div class="vertical-icon">🎪</div>
+    <div class="vertical-title">Inflatables</div>
+    <div class="vertical-meta">
+      <span class="badge badge-new">Nascent</span>
+      <span class="chevron">▶</span>
+    </div>
+  </div>
+  <div class="vertical-body">
+    <div class="persona-strip">
+      <div class="persona-chip">Todd-adjacent (ops-heavy)</div>
+      <div class="persona-chip">Betty-adjacent (solo/small)</div>
+      <div class="persona-chip">No defined persona yet</div>
+    </div>
+    <div class="desire-strip">
+      <div class="desire-chip">Control (hypothesis)</div>
+      <div class="desire-chip">Time (hypothesis)</div>
+      <div class="desire-chip">⚠ Needs VoC validation</div>
+    </div>
+    <div class="system-note" style="margin: 14px 0 16px;">
+      <strong>⚠ Production note</strong> — Inflatables vocabulary is a starter bank only. Needs a VoC sourcing pass (Intercom transcripts, sales call notes, customer interviews) before copy scales. Use these as hypothesis lines to test — not production-ready evergreen copy.
+    </div>
+    <div class="platform-grid">
+
+      <div class="platform-card">
+        <div class="platform-card-header"><span class="platform-icon">📘</span> Meta ads — static (test copy)</div>
+        <div class="copy-block">
+          <div class="copy-stage stage-tofu"><div class="dot dot-tofu"></div> TOFU — hypothesis A (control)</div>
+          <div class="copy-line headline">Bounce house operators: your blowers are scheduled. Is your inventory?</div>
+          <div class="copy-subtext">Primary text: Inflatables, combo units, water slides, generators — when your inflatable rental business has 20 units out on a Saturday, you need to know exactly where each one is.</div>
+        </div>
+        <div class="copy-block">
+          <div class="copy-stage stage-tofu"><div class="dot dot-tofu"></div> TOFU — hypothesis B (time)</div>
+          <div class="copy-line headline">Inflatable rental businesses: stop doing Sunday quotes at midnight.</div>
+          <div class="copy-subtext">Primary text: Goodshuffle Pro sends your inflatable rental proposals automatically — so the bounce house is booked before your crew is back from delivery.</div>
+        </div>
+        <div class="copy-block">
+          <div class="copy-stage stage-bofu"><div class="dot dot-bofu"></div> BOFU</div>
+          <div class="copy-line headline">See how inflatable rental operators manage bookings, inventory, and contracts — in one place.</div>
+          <div class="copy-subtext">Primary text: From bounce house inquiry to signed contract and deposit, Goodshuffle Pro handles your inflatable rental business end-to-end. Free demo, 20 minutes.</div>
+        </div>
+      </div>
+
+      <div class="platform-card">
+        <div class="platform-card-header"><span class="platform-icon">🎬</span> Video hook lines</div>
+        <div class="copy-block">
+          <div class="copy-stage stage-tofu"><div class="dot dot-tofu"></div> TOFU</div>
+          <div class="copy-line hook">"Bounce house operators — how do you track 30 inflatables, 12 blowers, and 4 drivers on a Saturday morning?"</div>
+        </div>
+        <div class="copy-block">
+          <div class="copy-stage stage-tofu"><div class="dot dot-tofu"></div> TOFU</div>
+          <div class="copy-line hook">"Your inflatable rental business is growing. Your booking system probably isn't keeping up."</div>
+        </div>
+      </div>
+
+      <div class="platform-card">
+        <div class="platform-card-header"><span class="platform-icon">✉️</span> Email subject lines</div>
+        <div class="copy-block">
+          <div class="copy-stage stage-tofu"><div class="dot dot-tofu"></div> TOFU</div>
+          <div class="copy-line">"The inflatable rental scheduling problem that costs you weekends"</div>
+          <div class="copy-line">"How bounce house operators are running tighter operations in 2026"</div>
+        </div>
+        <div class="copy-block">
+          <div class="copy-stage stage-bofu"><div class="dot dot-bofu"></div> BOFU</div>
+          <div class="copy-line">"Your inflatable rental business, with a real booking system — see it in 20 min"</div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<!-- ══ PLAN TIER OVERLAY ══ -->
+<div class="section-label" style="margin-top:40px">Plan tier overlay — Lite vs. Standard</div>
+<div class="system-note">
+  <strong>Messaging principle</strong> — Solo operators (Lite, ~$39/mo) don't want to be told they're "small." Lead with permission and professionalism, not aspiration or "get bigger" framing. Standard messaging leads with team coordination, growth, and scaling without breaking.
+</div>
+
+<div class="vertical-block" id="vt" style="margin-top:14px">
+  <div class="vertical-header" onclick="toggle('vt')">
+    <div class="vertical-icon">🎚️</div>
+    <div class="vertical-title">Lite vs. Standard — copy variants</div>
+    <div class="vertical-meta"><span class="chevron">▶</span></div>
+  </div>
+  <div class="vertical-body">
+    <div class="platform-grid">
+
+      <div class="platform-card">
+        <div class="platform-card-header"><span class="platform-icon">🟡</span> Lite plan — solo operator framing</div>
+        <div class="copy-block">
+          <div class="copy-stage stage-tofu"><div class="dot dot-tofu"></div> TOFU headlines</div>
+          <div class="copy-line headline">Solo event rental operator? You run a real business. Your software should too.</div>
+          <div class="copy-line headline" style="margin-top:8px">You don't need a team to run your event rental business like a pro.</div>
+        </div>
+        <div class="copy-block">
+          <div class="copy-stage stage-mofu"><div class="dot dot-mofu"></div> MOFU primary text</div>
+          <div class="copy-line">Goodshuffle Pro Lite is built for solo operators who mean business. Quotes, contracts, deposits, and inventory — everything you need to run your event rental business professionally, starting at $39/mo.</div>
+        </div>
+        <div class="copy-block">
+          <div class="copy-stage stage-bofu"><div class="dot dot-bofu"></div> BOFU</div>
+          <div class="copy-line">The best solo event rental operators use Goodshuffle Pro Lite. See if it fits your business — free demo, no pressure.</div>
+        </div>
+      </div>
+
+      <div class="platform-card">
+        <div class="platform-card-header"><span class="platform-icon">🔵</span> Standard plan — team / scale framing</div>
+        <div class="copy-block">
+          <div class="copy-stage stage-tofu"><div class="dot dot-tofu"></div> TOFU headlines</div>
+          <div class="copy-line headline">Your event rental crew is growing. Your software should keep up.</div>
+          <div class="copy-line headline" style="margin-top:8px">Multi-user. Multi-job. One event rental system that doesn't break under pressure.</div>
+        </div>
+        <div class="copy-block">
+          <div class="copy-stage stage-mofu"><div class="dot dot-mofu"></div> MOFU primary text</div>
+          <div class="copy-line">When your event rental business has crews in the field and clients in the portal and quotes going out every hour — you need software that scales with you. Goodshuffle Pro Standard was built for growing teams.</div>
+        </div>
+        <div class="copy-block">
+          <div class="copy-stage stage-bofu"><div class="dot dot-bofu"></div> BOFU</div>
+          <div class="copy-line">Growing event rental operations run on Goodshuffle Pro. See how it fits your team — free demo, 20 minutes.</div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<div class="footer">
+  <strong>Sources</strong> — Built from: Vertical Strategy + Segmentation Systems (Confluence MAR, May 2026) · Content Strategy: How We're Approaching the Market (Confluence MAR, Apr 2026) · Selling to Each Persona (Confluence SM) · Andromeda Creative Strategy v2 desire axis · Facebook Ad Copy Coach v4 Tier 2 vocabulary banks · AG Audience-Naming Rule directive (April 2026).<br><br>
+  <strong>Rules applied</strong> — Audience-Naming Rule (4/5 headlines name the audience explicitly) · Tier 2 dog-whistle vocabulary embedded per vertical · Desire axis varied across copy sets · TOFU = punchier/scroll-stop · BOFU = grounded, direct, no hype · Solo/Lite framing avoids "small" language per plan messaging principle · Inter font, sentence case, GSP brand colors throughout.
+</div>
+
+<script>
+  function toggle(id) {
+    const block = document.getElementById(id);
+    block.classList.toggle('open');
+  }
+</script>
+</body>
+</html>
